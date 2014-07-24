@@ -1,0 +1,107 @@
+@mixin perspective{
+	-webkit-perspective: 70;
+	-moz-perspective: 70;
+	-ms-perspective: 70;
+	perspective: 70;
+}
+
+@mixin extend_perspective{
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-ms-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+@mixin spin{
+
+	@-webkit-keyframes spin{
+		0%{
+			opacity: 1;
+		}
+		100%{
+			opacity: 0;
+		}
+	}
+
+	@-moz-keyframes spin{
+		0%{
+			opacity: 1;
+		}
+		100%{
+			opacity: 0;
+		}
+	}
+
+	@-ms-keyframes spin{
+		0%{
+			opacity: 1;
+		}
+		100%{
+			opacity: 0;
+		}
+	}
+
+	@-o-keyframes spin{
+		0%{
+			opacity: 1;
+		}
+		100%{
+			opacity: 0;
+		}
+	}
+
+}
+
+@mixin anim{
+$j:0.1;
+	@for $i from 1 to 13{
+		.loader > div.div#{$i}{
+			-webkit-transform: rotate(#{$i * 30}deg) translate(0,-30px);
+			-webkit-animation-delay: #{$j}s;
+
+			-moz-transform: rotate(#{$i * 30}deg) translate(0,-30px);
+			-moz-animation-delay: #{$j}s;
+
+			-ms-transform: rotate(#{$i * 30}deg) translate(0,-30px);
+			-ms-animation-delay: #{$j}s;
+
+			-o-transform: rotate(#{$i * 30}deg) translate(0,-30px);
+			-o-animation-delay: #{$j}s;
+
+			$j:$j + 0.1;
+		}
+	}
+} 
+
+
+body{
+	background: #333;
+}
+
+.container{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%,-50%);
+	height: 30px;
+	width: 30px;
+	@include perspective;
+}
+
+.container .loader{
+	@include extend_perspective;
+}
+
+.loader div{
+	position: absolute;
+	height: 30px;
+	width:10px;
+	background-color: #fff;
+	opacity: 0.1;
+	border-radius: 10px;
+	-webkit-animation: spin 1.2s linear infinite;
+	-moz-animation: spin 1.2s linear infinite;
+}
+
+@include anim;
+@include spin; 
